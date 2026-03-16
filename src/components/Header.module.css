@@ -1,0 +1,175 @@
+.header {
+  display: flex;
+  height: 80px;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  background-color: white;
+  padding: 0 16px;
+}
+
+/* 로고 */
+.logo {
+  display: flex;
+  height: 80px;
+  align-items: center;
+  padding: 8px 16px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logoImg {
+  object-fit: contain;
+}
+
+/* 데스크탑 네비게이션 */
+.nav {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.navLink {
+  font-size: 24px;
+  font-weight: 700;
+  width: 240px;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  transition: color 0.2s;
+}
+
+.navLink:hover {
+  color: #1daeef;
+}
+
+.navLinkActive {
+  color: #1daeef;
+  border-bottom: 2px solid #1daeef;
+  padding-bottom: 4px;
+}
+
+.spacer {
+  width: 252px;
+  flex-shrink: 0;
+}
+
+/* 햄버거 버튼 */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 101;
+}
+
+.bar {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background-color: #222;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+/* 햄버거 → X 애니메이션 */
+.bar1Open {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.bar2Open {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.bar3Open {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* 모바일 메뉴 */
+.mobileMenu {
+  display: none;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  flex-direction: column;
+  padding: 16px 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  z-index: 100;
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.mobileMenuOpen {
+  display: flex;
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobileNavLink {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+  text-decoration: none;
+  padding: 16px 32px;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.mobileNavLink:hover {
+  color: #1daeef;
+  background-color: #f0fbff;
+  border-left-color: #1daeef;
+}
+
+.mobileNavLinkActive {
+  color: #1daeef;
+  background-color: #f0fbff;
+  border-left-color: #1daeef;
+}
+
+/* 오버레이 */
+.overlay {
+  position: fixed;
+  inset: 0;
+  top: 80px;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 99;
+}
+
+/* 태블릿 */
+@media (max-width: 1023px) {
+  .nav {
+    gap: 20px;
+  }
+
+  .navLink {
+    font-size: 18px;
+    width: auto;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 767px) {
+  .nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}

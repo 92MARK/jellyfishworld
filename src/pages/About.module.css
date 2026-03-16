@@ -1,0 +1,323 @@
+/* 히어로 */
+.hero {
+  position: relative;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroTitle {
+  position: relative;
+  z-index: 1;
+  color: #003a52;
+  font-size: 56px;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* 공통 섹션 */
+.sectionTitle {
+  color: #222;
+  font-size: 36px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.sectionDesc {
+  color: #666;
+  font-size: 18px;
+  text-align: center;
+  line-height: 1.8;
+  margin-bottom: 64px;
+}
+
+/* 서비스 섹션 */
+.serviceSection {
+  background-color: white;
+  padding: 100px 80px;
+}
+
+.serviceList {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.serviceItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;              /* gap 제거하고 각각 margin으로 조절 */
+  width: 200px;
+}
+
+.serviceImgWrap {
+  width: 206px;
+  height: 188px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 24px;  /* 이미지 아래 간격 */
+}
+
+.serviceImg {
+  object-fit: contain;
+}
+
+.serviceTitle {
+  color: #222;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;  /* 타이틀 아래 간격 */
+}
+
+.serviceDesc {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.serviceDesc p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* 연혁 섹션 */
+.historySection {
+  background-color: #f8f9fa;
+  padding: 100px 80px;
+}
+
+.historyWrap {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.historyLine {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #ddd;
+  z-index: 0;
+}
+
+.historyList {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.historyItem {
+  flex: 1;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.historyPeriod {
+  color: #444;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12px;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.historyItemHovered .historyPeriod {
+  color: #1daeef;
+}
+
+.historyDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #ddd;
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px #ddd;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.historyItemHovered .historyDot {
+  background-color: #1daeef;
+  box-shadow: 0 0 0 2px #1daeef;
+  transform: scale(1.3);
+}
+
+/* 연혁 영역 고정 높이 래퍼 */
+.historyContentWrap {
+  margin-top: 20px;
+  width: 160px;
+  transition: none;
+}
+
+/* 콘텐츠 박스 */
+.historyContent {
+  background-color: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  width: 100%;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.historyContentVisible {
+  opacity: 1;
+  transform: translateY(0px);
+  pointer-events: all;
+}
+
+.historyContentItem {
+  color: #555;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* 고객사 슬라이드 */
+.clientSection {
+  background-color: white;
+  padding: 100px 0;
+  overflow: hidden;
+}
+
+.clientSection .sectionTitle,
+.clientSection .sectionDesc {
+  padding: 0 80px;
+}
+
+.clientSlider {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.clientRowWrap {
+  overflow: hidden;
+  width: 100%;
+}
+
+.clientTrack {
+  display: flex;
+  gap: 32px;
+  width: max-content;
+  animation: slideLeft 30s linear infinite;
+}
+
+.clientTrackReverse {
+  animation: slideRight 30s linear infinite;
+}
+
+@keyframes slideLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-25%); }
+}
+
+@keyframes slideRight {
+  0% { transform: translateX(-25%); }
+  100% { transform: translateX(0); }
+}
+
+.clientLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 80px;
+  flex-shrink: 0;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.clientLogo img {
+  max-width: 120px;
+  max-height: 50px;
+  object-fit: contain;
+  filter: grayscale(30%);
+  transition: filter 0.3s ease;
+}
+
+.clientLogo img:hover {
+  filter: grayscale(0%);
+}
+
+/* 지도 섹션 */
+.mapSection {
+  background-color: #f8f9fa;
+  padding: 100px 80px;
+}
+
+.map {
+  width: 100%;
+  height: 450px;
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 반응형 */
+@media (max-width: 1023px) {
+  .serviceSection,
+  .historySection,
+  .mapSection {
+    padding: 80px 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .heroTitle { font-size: 40px; }
+
+  .serviceSection,
+  .historySection,
+  .mapSection {
+    padding: 60px 24px;
+  }
+
+  .serviceList { gap: 24px; }
+  .serviceItem { width: 140px; }
+  .sectionTitle { font-size: 28px; }
+  .sectionDesc { font-size: 16px; }
+
+  .historyContent { width: 120px; }
+  .historyContentItem { font-size: 11px; }
+
+  .map { height: 300px; }
+
+  .clientSection .sectionTitle,
+  .clientSection .sectionDesc {
+    padding: 0 24px;
+  }
+}
