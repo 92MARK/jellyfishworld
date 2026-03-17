@@ -1,10 +1,98 @@
-@import "tailwindcss";
+:root {
+  --hero-height: 420px;
+}
+
+/* SUITE 폰트 */
+@font-face {
+  font-family: 'SUITE';
+  src: url('/fonts/SUITE-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SUITE';
+  src: url('/fonts/SUITE-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SUITE';
+  src: url('/fonts/SUITE-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SUITE';
+  src: url('/fonts/SUITE-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SUITE';
+  src: url('/fonts/SUITE-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Pretendard 폰트 */
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* 전역 초기화 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* 크로스 브라우저 기본 스타일 */
@@ -16,7 +104,7 @@ html {
 }
 
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'SUITE', 'Pretendard', 'Noto Sans KR', sans-serif;
   color: #222;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -55,14 +143,6 @@ img {
   user-drag: none;
 }
 
-/* 전체 텍스트 드래그 방지 */
-* {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 /* 폼 요소는 선택 허용 */
 input,
 textarea {
@@ -76,3 +156,19 @@ textarea {
 /* 모바일: ~ 767px */
 /* 태블릿: 768px ~ 1023px */
 /* 데스크탑: 1024px ~ */
+
+
+
+/* 태블릿 */
+@media (max-width: 1023px) {
+  :root {
+    --hero-height: 300px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 767px) {
+  :root {
+    --hero-height: 220px;
+  }
+}

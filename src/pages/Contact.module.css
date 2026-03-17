@@ -1,7 +1,7 @@
 /* 히어로 */
 .hero {
   position: relative;
-  height: 280px;
+  height: var(--hero-height);
   display: flex;
   align-items: center;
   justify-content: center;

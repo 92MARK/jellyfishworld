@@ -8,17 +8,31 @@ const navItems = [
   { path: '/contact', label: '문의' },
 ]
 
+// ✅ 스크롤 초기화 함수
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'instant' })
+}
+
 const Header = () => {
   const location = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
 
   const toggleMenu = () => setMenuOpen((prev) => !prev)
-  const closeMenu = () => setMenuOpen(false)
+
+  const closeMenu = () => {
+    setMenuOpen(false)
+    scrollToTop()  // ← 모바일 메뉴 닫을 때도 스크롤 초기화
+  }
+
+  const handleNavClick = () => {
+    setMenuOpen(false)
+    scrollToTop()  // ← 메뉴 클릭시 스크롤 초기화
+  }
 
   return (
     <header className={styles.header}>
-      {/* 로고 */}
-      <Link to="/" className={styles.logo} onClick={closeMenu}>
+      {/* 로고 - 클릭시 스크롤 초기화 */}
+      <Link to="/" className={styles.logo} onClick={scrollToTop}>
         <img src="/images/logo.png" alt="젤리피쉬월드" className={styles.logoImg} />
       </Link>
 
@@ -29,13 +43,14 @@ const Header = () => {
             key={item.path}
             to={item.path}
             className={`${styles.navLink} ${location.pathname === item.path ? styles.navLinkActive : ''}`}
+            onClick={scrollToTop}  // ← 클릭시 스크롤 초기화
           >
             {item.label}
           </Link>
         ))}
       </nav>
 
-      {/* 햄버거 버튼 (모바일) */}
+      {/* 햄버거 버튼 */}
       <button
         className={styles.hamburger}
         onClick={toggleMenu}
@@ -53,14 +68,14 @@ const Header = () => {
             key={item.path}
             to={item.path}
             className={`${styles.mobileNavLink} ${location.pathname === item.path ? styles.mobileNavLinkActive : ''}`}
-            onClick={closeMenu}
+            onClick={handleNavClick}  // ← 클릭시 메뉴 닫고 스크롤 초기화
           >
             {item.label}
           </Link>
         ))}
       </div>
 
-      {/* 모바일 메뉴 오버레이 */}
+      {/* 모바일 오버레이 */}
       {menuOpen && (
         <div className={styles.overlay} onClick={closeMenu} />
       )}

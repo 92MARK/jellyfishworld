@@ -1,7 +1,7 @@
 /* 히어로 */
 .hero {
   position: relative;
-  height: 280px;
+  height: var(--hero-height);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -306,12 +306,11 @@
     padding: 60px 24px;
   }
 
-  .serviceList { gap: 24px; }
+  .serviceList { gap: 64px; }
   .serviceItem { width: 140px; }
   .sectionTitle { font-size: 28px; }
   .sectionDesc { font-size: 16px; }
 
-  .historyContent { width: 120px; }
   .historyContentItem { font-size: 11px; }
 
   .map { height: 300px; }
