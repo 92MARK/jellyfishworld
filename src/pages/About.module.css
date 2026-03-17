@@ -42,6 +42,35 @@
   margin-bottom: 64px;
 }
 
+/* 둥둥 떠다니는 애니메이션 */
+@keyframes float1 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes float3 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes float4 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes float5 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+/* 배경 원형 + 캐릭터 이미지 함께 움직이기 */
+.serviceItem:nth-child(1) .serviceImgWrap { animation: float1 3s ease-in-out infinite; }
+.serviceItem:nth-child(2) .serviceImgWrap { animation: float2 3.5s ease-in-out infinite; }
+.serviceItem:nth-child(3) .serviceImgWrap { animation: float3 2.8s ease-in-out infinite; }
+.serviceItem:nth-child(4) .serviceImgWrap { animation: float4 3.2s ease-in-out infinite; }
+.serviceItem:nth-child(5) .serviceImgWrap { animation: float5 3.7s ease-in-out infinite; }
+
 /* 서비스 섹션 */
 .serviceSection {
   background-color: white;
@@ -126,7 +155,6 @@
 .historyList {
   display: flex;
   gap: 0;
-  overflow-x: auto;
   padding-bottom: 20px;
   position: relative;
   z-index: 1;
@@ -176,7 +204,7 @@
 /* 연혁 영역 고정 높이 래퍼 */
 .historyContentWrap {
   margin-top: 20px;
-  width: 160px;
+  width: max-content;
   transition: none;
 }
 
@@ -186,7 +214,8 @@
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  width: 100%;
+  width: max-content;
+  white-space: normal;
   opacity: 0;
   transform: translateY(-8px);
   transition: opacity 0.3s ease, transform 0.3s ease;
