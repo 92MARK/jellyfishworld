@@ -57,33 +57,49 @@ const DetailImages = ({ folder, title }) => {
     folderRef.current = folder
 
     const loadImages = async () => {
-      const validImages = []
+      setImages([])
+      setLoading(true)
+      // 1단계: 1~20개 병렬 체크
+      const BATCH_SIZE = 20
+      const MAX_IMAGES = 100
+      let allValid = []
 
-      for (let i = 1; i <= 100; i++) {
-        if (folderRef.current !== folder) break
+      for (let start = 1; start <= MAX_IMAGES; start += BATCH_SIZE) {
+        if (folderRef.current !== folder) return
 
-        const src = `/images/portfolio/${folder}/img${i}.png`
-        const exists = await checkImageExists(src)
-
-        if (exists) {
-          validImages.push(src)
-        } else {
-          break
+        const batch = []
+        for (let i = start; i < start + BATCH_SIZE; i++) {
+          batch.push(`/images/portfolio/${folder}/img${i}.png`)
         }
+
+        // 배치 내 병렬 처리
+        const results = await Promise.all(
+          batch.map((src) =>
+            checkImageExists(src).then(exists => ({ src, exists }))
+          )
+        )
+
+        // 순서대로 유효한 이미지만 추가, 없으면 중단
+        let batchBroken = false
+        for (const result of results) {
+          if (result.exists) {
+            allValid.push(result.src)
+          } else {
+            batchBroken = true
+            break
+          }
+        }
+
+        if (batchBroken) break
       }
 
       if (folderRef.current === folder) {
-        setImages(validImages)
+        setImages(allValid)
         setLoading(false)
       }
     }
 
-    setTimeout(() => {
-      setImages([])
-      setLoading(true)
-      loadImages()
-    }, 0)
-
+    loadImages()
   }, [folder])
 
   return (

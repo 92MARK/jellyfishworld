@@ -147,11 +147,16 @@ const clientRows = [
 const HistoryItem = forwardRef(({ period, items, fixedHeight }, ref) => {
   const [hovered, setHovered] = useState(false)
 
+  const handleTouchStart = () => setHovered(true)
+  const handleTouchEnd = () => setTimeout(() => setHovered(false), 1500)
+
   return (
     <div
       className={`${styles.historyItem} ${hovered ? styles.historyItemHovered : ''}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       <div className={styles.historyPeriod}>{period}</div>
       <div className={styles.historyDot} />

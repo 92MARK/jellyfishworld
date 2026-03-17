@@ -240,6 +240,12 @@
   animation: slideRight 30s linear infinite;
 }
 
+/* hover 시 슬라이더 일시정지 */
+.clientRowWrap:hover .clientTrack,
+.clientRowWrap:hover .clientTrackReverse {
+  animation-play-state: paused;
+}
+
 @keyframes slideLeft {
   0% { transform: translateX(0); }
   100% { transform: translateX(-25%); }
@@ -318,5 +324,21 @@
   .clientSection .sectionTitle,
   .clientSection .sectionDesc {
     padding: 0 24px;
+  }
+
+  /* 모바일 터치 힌트 - 모바일에서만 표시 */
+  .historyItem::after {
+    content: '터치하면 내용이 보여요';
+    display: block;
+    font-size: 11px;
+    color: #bbb;
+    text-align: center;
+    margin-top: 8px;
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
+
+  .historyItemHovered::after {
+    opacity: 0;
   }
 }

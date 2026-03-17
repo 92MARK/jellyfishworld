@@ -110,6 +110,14 @@ const Contact = () => {
     // 문의 내용 1000자 초과 입력 막기
     if (name === 'message' && value.length > 1000) return
 
+    // 연락처 숫자/하이픈만 허용
+    if (name === 'from_number') {
+      const onlyNumbersAndHyphen = value.replace(/[^0-9-]/g, '')
+      setForm({ ...form, [name]: onlyNumbersAndHyphen })
+      setErrors((prev) => ({ ...prev, [name]: '' }))
+      return
+    }
+
     setForm({ ...form, [name]: value })
     setErrors((prev) => ({ ...prev, [name]: '' }))
   }
@@ -295,7 +303,7 @@ const scrollToFirstError = (newErrors) => {
                     name="from_number"
                     value={form.from_number}
                     onChange={handleChange}
-                    placeholder="연락처를 입력해 주세요."
+                    placeholder="숫자와 하이픈만 입력해 주세요. (예: 010-1234-5678)"
                     className={`${styles.input} ${errors.from_number ? styles.inputError : ""}`}
                   />
                   {errors.from_number && (
