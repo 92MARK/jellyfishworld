@@ -19,8 +19,8 @@
 .heroTitle {
   position: relative;
   z-index: 1;
-  color: #003a52;
-  font-size: 56px;
+  color: #353535;
+  font-size: 64px;
   font-weight: 800;
   text-align: center;
 }
@@ -28,18 +28,20 @@
 /* 공통 섹션 */
 .sectionTitle {
   color: #222;
-  font-size: 36px;
-  font-weight: 800;
+  font-size: 48px;
+  font-weight: 700;
   text-align: center;
   margin-bottom: 16px;
 }
 
 .sectionDesc {
-  color: #666;
-  font-size: 18px;
+  color: #333;
+  font-size: 24px;
   text-align: center;
-  line-height: 1.8;
+  line-height: 1.4;
   margin-bottom: 64px;
+  font-family: Pretendard;
+  font-weight: 500;
 }
 
 /* 둥둥 떠다니는 애니메이션 */
@@ -80,7 +82,7 @@
 .serviceList {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 50px;
   flex-wrap: wrap;
 }
 
@@ -88,8 +90,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;              /* gap 제거하고 각각 margin으로 조절 */
-  width: 200px;
+  gap: 0;
+  width: 230px;
 }
 
 .serviceImgWrap {
@@ -102,7 +104,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-bottom: 24px;  /* 이미지 아래 간격 */
+  margin-bottom: 24px;
 }
 
 .serviceImg {
@@ -111,10 +113,10 @@
 
 .serviceTitle {
   color: #222;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 20px;  /* 타이틀 아래 간격 */
+  margin-bottom: 20px;
 }
 
 .serviceDesc {
@@ -125,9 +127,11 @@
 }
 
 .serviceDesc p {
-  color: #666;
-  font-size: 14px;
-  line-height: 1.6;
+  color: #333;
+  font-size: 20px;
+  line-height: 1.4;
+  font-family: 'Pretendard';
+  font-weight: 500;
 }
 
 /* 연혁 섹션 */
@@ -171,7 +175,7 @@
 }
 
 .historyPeriod {
-  color: #444;
+  color: #222;
   font-size: 14px;
   font-weight: 700;
   text-align: center;
@@ -229,7 +233,7 @@
 }
 
 .historyContentItem {
-  color: #555;
+  color: #222;
   font-size: 13px;
   line-height: 1.8;
 }
@@ -323,16 +327,95 @@
   margin: 0 auto;
 }
 
-/* 반응형 */
-@media (max-width: 1023px) {
-  .serviceSection,
-  .historySection,
-  .mapSection {
-    padding: 80px 40px;
-  }
+/* 모바일 아코디언 연혁 래퍼 */
+.historyMobileWrap {
+  display: none; /* 기본: 숨김 (데스크탑) */
+  flex-direction: column;
+  gap: 8px;
 }
 
-@media (max-width: 767px) {
+/* 모바일 아코디언 연혁 스타일 */
+.historyItemMobile {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.historyItemMobileOpen {
+  border-color: #1daeef;
+}
+
+.historyMobileHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.historyMobilePeriod {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1daeef;
+  flex: 1;
+  white-space: nowrap;
+}
+
+.historyMobileBadge {
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  background: #1daeef;
+  border-radius: 20px;
+  padding: 2px 10px;
+  white-space: nowrap;
+}
+
+.historyMobileArrow {
+  font-size: 16px;
+  color: #999;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.historyMobileArrowOpen {
+  transform: rotate(180deg);
+}
+
+.historyMobileContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.historyMobileContentOpen {
+  max-height: 600px;
+}
+
+.historyMobileList {
+  list-style: none;
+  padding: 0 16px 14px 16px;
+  margin: 0;
+  border-top: 1px solid #f0f0f0;
+}
+
+.historyMobileItem {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.75;
+  padding: 3px 0;
+}
+
+/* 반응형 */
+@media (max-width: 1230px) {
   .heroTitle { font-size: 40px; }
 
   .serviceSection,
@@ -341,33 +424,46 @@
     padding: 60px 24px;
   }
 
-  .serviceList { gap: 64px; }
-  .serviceItem { width: 140px; }
-  .sectionTitle { font-size: 28px; }
-  .sectionDesc { font-size: 16px; }
+  .serviceList { gap: 40px; }
+  .serviceItem { width: 180px; }
+  .sectionTitle { font-size: 32px; }
+  .sectionDesc { font-size: 18px; }
 
-  .historyContentItem { font-size: 11px; }
+  /* 1023px부터 아코디언으로 전환 */
+  .historyWrap {
+    display: none;
+  }
 
-  .map { height: 300px; }
+  .historyMobileWrap {
+    display: flex;
+  }
+
+  .historyList {
+    display: none;
+  }
+
+  .map { height: 350px; }
 
   .clientSection .sectionTitle,
   .clientSection .sectionDesc {
     padding: 0 24px;
   }
+}
 
-  /* 모바일 터치 힌트 - 모바일에서만 표시 */
-  .historyItem::after {
-    content: '터치하면 내용이 보여요';
-    display: block;
-    font-size: 11px;
-    color: #bbb;
-    text-align: center;
-    margin-top: 8px;
-    opacity: 1;
-    transition: opacity 0.3s;
+@media (max-width: 767px) {
+  .heroTitle { font-size: 32px; }
+
+  .serviceSection,
+  .historySection,
+  .mapSection {
+    padding: 48px 20px;
   }
 
-  .historyItemHovered::after {
-    opacity: 0;
-  }
+  .serviceList { gap: 32px; }
+  .serviceItem { width: 150px; }
+  .serviceImgWrap { width: 150px; height: 140px; }
+  .sectionTitle { font-size: 26px; }
+  .sectionDesc { font-size: 15px; margin-bottom: 40px; }
+
+  .map { height: 280px; }
 }

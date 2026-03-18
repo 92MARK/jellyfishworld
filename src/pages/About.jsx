@@ -193,10 +193,11 @@ const clientRows = [
   [...clientLogos.slice(8), ...clientLogos.slice(0, 8)],
 ]
 
-// 연혁 아이템 컴포넌트
+// 화면 크기 감지 훅 삭제 - CSS로만 제어
+
+// 데스크탑 연혁 아이템
 const HistoryItem = forwardRef(({ period, items, fixedHeight }, ref) => {
   const [hovered, setHovered] = useState(false)
-
   const handleTouchStart = () => setHovered(true)
   const handleTouchEnd = () => setTimeout(() => setHovered(false), 1500)
 
@@ -210,13 +211,10 @@ const HistoryItem = forwardRef(({ period, items, fixedHeight }, ref) => {
     >
       <div className={styles.historyPeriod}>{period}</div>
       <div className={styles.historyDot} />
-
-      {/* 영역은 항상 최대 높이로 고정 */}
       <div
         className={styles.historyContentWrap}
         style={{ height: fixedHeight > 0 ? `${fixedHeight}px` : 'auto' }}
       >
-        {/* 콘텐츠 박스 - ref로 높이 측정 */}
         <div
           ref={ref}
           className={`${styles.historyContent} ${hovered ? styles.historyContentVisible : ''}`}
@@ -229,8 +227,28 @@ const HistoryItem = forwardRef(({ period, items, fixedHeight }, ref) => {
     </div>
   )
 })
-
 HistoryItem.displayName = 'HistoryItem'
+
+// 모바일 아코디언 아이템 (별도 컴포넌트)
+const HistoryItemMobile = ({ period, items }) => {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className={`${styles.historyItemMobile} ${open ? styles.historyItemMobileOpen : ''}`}>
+      <button className={styles.historyMobileHeader} onClick={() => setOpen(prev => !prev)}>
+        <span className={styles.historyMobilePeriod}>{period}</span>
+        <span className={styles.historyMobileBadge}>{items.length}건</span>
+        <span className={`${styles.historyMobileArrow} ${open ? styles.historyMobileArrowOpen : ''}`}>▾</span>
+      </button>
+      <div className={`${styles.historyMobileContent} ${open ? styles.historyMobileContentOpen : ''}`}>
+        <ul className={styles.historyMobileList}>
+          {items.map((item, idx) => (
+            <li key={idx} className={styles.historyMobileItem}>· {item}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
 
 // 고객사 슬라이드 행 컴포넌트
 const ClientRow = ({ logos, reverse }) => {
@@ -367,6 +385,8 @@ const About = () => {
         <p className={styles.sectionDesc}>
           하나씩 쌓아온 시간들이 경험으로 증명된 성장 과정을 보여 드려요.
         </p>
+
+        {/* 데스크탑: 기존 hover 타임라인 */}
         <div className={styles.historyWrap}>
           <div className={styles.historyLine} />
           <div className={styles.historyList}>
@@ -376,12 +396,21 @@ const About = () => {
                 period={h.period}
                 items={h.items}
                 fixedHeight={fixedHeight}
-                ref={(el) => {
-                  contentRefs.current[idx] = el;
-                }}
+                ref={(el) => { contentRefs.current[idx] = el }}
               />
             ))}
           </div>
+        </div>
+
+        {/* 모바일: 아코디언 타임라인 */}
+        <div className={styles.historyMobileWrap}>
+          {history.map((h) => (
+            <HistoryItemMobile
+              key={`mob-${h.period}`}
+              period={h.period}
+              items={h.items}
+            />
+          ))}
         </div>
       </section>
 
