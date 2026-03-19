@@ -18,7 +18,7 @@ const PortfolioCard = ({ item, onClick }) => (
   <div className={styles.card} onClick={() => onClick(item)}>
     <div className={styles.cardThumb}>
       <img
-        src={`/images/portfolio/${item.folder}/img1.png`}
+        src={`/images/portfolio/${item.folder}/img1.webp`}
         alt={item.title}
       />
     </div>
@@ -69,7 +69,7 @@ const DetailImages = ({ folder, title }) => {
 
         const batch = []
         for (let i = start; i < start + BATCH_SIZE; i++) {
-          batch.push(`/images/portfolio/${folder}/img${i}.png`)
+          batch.push(`/images/portfolio/${folder}/img${i}.webp`)
         }
 
         // 배치 내 병렬 처리
