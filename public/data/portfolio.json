@@ -875,8 +875,7 @@
     "title": "\"신입사원 장미씨\" 캐릭터 이모티콘 디자인",
     "folder": "character/item1",
     "year": "2023",
-    "duration": "개월",
-    "quantity": "편",
+    "environment": "Adobe Illustrator",
     "format": "이모티콘"
   },
   {
@@ -886,8 +885,7 @@
     "title": "미래엔 디지털 초코팝 \"리스닝&스피킹 애니메이션\" 캐릭터 디자인",
     "folder": "character/item2",
     "year": "2023",
-    "duration": "개월",
-    "quantity": "편",
+    "environment": "Adobe Illustrator",
     "format": "MP4"
   },
   {
@@ -897,8 +895,7 @@
     "title": "교원 \"리틀 키즈 2D 애니메이션\" 캐릭터 디자인",
     "folder": "character/item3",
     "year": "2024",
-    "duration": "개월",
-    "quantity": "편",
+    "environment": "Adobe Illustrator",
     "format": "MP4"
   },
   {
@@ -908,8 +905,7 @@
     "title": "비상 \"영어 교사 자료 SONG, CHANT 애니메이션\" 캐릭터 디자인",
     "folder": "character/item4",
     "year": "2025",
-    "duration": "개월",
-    "quantity": "편",
+    "environment": "Adobe Illustrator",
     "format": "MP4"
   },
   {
@@ -919,8 +915,7 @@
     "title": "비상 \"영어 5·6학년 진도 애니메이션\" 캐릭터 디자인",
     "folder": "character/item5",
     "year": "2026",
-    "duration": "개월",
-    "quantity": "편",
+    "environment": "Adobe Illustrator",
     "format": "MP4"
   }
 ]

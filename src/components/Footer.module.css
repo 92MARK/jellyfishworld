@@ -59,6 +59,97 @@
   color: #1daeef;
 }
 
+/* 링크 버튼 */
+.link {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+}
+
+/* 팝업 오버레이 */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* 팝업 박스 */
+.modal {
+  background-color: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 720px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 팝업 헤더 */
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px;
+  border-bottom: 1px solid #eee;
+  flex-shrink: 0;
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: #222;
+}
+
+.modalClose {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.modalClose:hover {
+  color: #222;
+}
+
+/* 팝업 내용 */
+.modalBody {
+  padding: 24px 28px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modalHeading {
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.modalHeading:first-child {
+  margin-top: 0;
+}
+
+.modalText {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.8;
+}
+
 .infoList {
   display: flex;
   flex-direction: column;
@@ -106,7 +197,8 @@
   }
 
   .character {
-    display: none;
+    top: 20px;
+    right: 0;
   }
 
   .link {

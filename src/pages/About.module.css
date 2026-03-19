@@ -23,6 +23,11 @@
   font-size: 64px;
   font-weight: 800;
   text-align: center;
+  text-shadow:
+    -2px -2px 0 #ffffff,
+    2px -2px 0 #ffffff,
+    -2px  2px 0 #ffffff,
+    2px  2px 0 #ffffff;
 }
 
 /* 공통 섹션 */
@@ -460,8 +465,9 @@
   }
 
   .serviceList { gap: 32px; }
-  .serviceItem { width: 150px; }
-  .serviceImgWrap { width: 150px; height: 140px; }
+  .serviceItem { width: 190px; }
+  /* .serviceImgWrap { width: 150px; height: 140px; } */
+  .serviceDesc p { font-size: 17px; }
   .sectionTitle { font-size: 26px; }
   .sectionDesc { font-size: 15px; margin-bottom: 40px; }
 

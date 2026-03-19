@@ -113,10 +113,14 @@ const DetailImages = ({ folder, title }) => {
 }
 
 const DetailView = ({ item, onBack }) => {
-  const isAnimationOrCharacter = item.categoryKey === 'animation' || item.categoryKey === 'character'
-
   const getMeta = () => {
-    if (isAnimationOrCharacter) {
+    if (item.categoryKey === 'character') {
+      return [
+        { label: '제작 환경', value: item.environment },
+        { label: '형식', value: item.format },
+      ]
+    }
+    if (item.categoryKey === 'animation') {
       return [
         { label: '프로젝트 기간', value: item.duration },
         { label: '수량', value: item.quantity },

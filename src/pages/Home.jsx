@@ -1,35 +1,35 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Home.module.css'
 import Seo from '../components/Seo'
 
 const slides = [
   {
-    bg: 'radial-gradient(circle at 70% 0%, #ffd6e0 0%, #ffffff 55%)',
-    titleColor: '#8b1a2e',
-    descColor: '#8b1a2e',
-    btnBg: '#ff6b8a',
+    bg: 'radial-gradient(circle at 70% 0%, #FFEEEFB2 0%, #ffffff 55%)',
+    titleColor: '#69313B',
+    descColor: '#F54E6B',
+    btnBg: '#FF7F89',
     img: '/images/character_pink.webp',
   },
   {
-    bg: 'radial-gradient(circle at 70% 0%, #ccf5cc 0%, #ffffff 55%)',
-    titleColor: '#1a5c1a',
-    descColor: '#1a5c1a',
-    btnBg: '#4caf50',
+    bg: 'radial-gradient(circle at 70% 0%, #EDFDC2B2 0%, #ffffff 55%)',
+    titleColor: '#396B11',
+    descColor: '#4E9110',
+    btnBg: '#3F7E00',
     img: '/images/character_green.webp',
   },
   {
-    bg: 'radial-gradient(circle at 70% 0%, #fff0b0 0%, #ffffff 55%)',
-    titleColor: '#7a4a00',
-    descColor: '#7a4a00',
-    btnBg: '#ff9800',
+    bg: 'radial-gradient(circle at 70% 0%, #FFEEB499 0%, #ffffff 55%)',
+    titleColor: '#743304',
+    descColor: '#A95010',
+    btnBg: '#FF9215',
     img: '/images/character_orange.webp',
   },
   {
-    bg: 'radial-gradient(circle at 70% 0%, #00d4ff 0%, #ffffff 55%)',
-    titleColor: '#003a6e',
-    descColor: '#003a6e',
-    btnBg: '#1daeef',
+    bg: 'radial-gradient(circle at 70% 0%, #51E1FF 0%, #ffffff 55%)',
+    titleColor: '#014966',
+    descColor: '#006086',
+    btnBg: '#0087A4',
     img: '/images/character_blue.webp',
   },
 ]
@@ -38,8 +38,8 @@ const Home = () => {
   const [current, setCurrent] = useState(0)
   const [fade, setFade] = useState(true)
   const [displaySlide, setDisplaySlide] = useState(slides[0])
+  const timerRef = useRef(null)
 
-  // useCallback으로 감싸서 의존성 문제 해결
   const goNext = useCallback((getNext) => {
     setFade(false)
     setTimeout(() => {
@@ -52,16 +52,25 @@ const Home = () => {
     }, 400)
   }, [])
 
-  useEffect(() => {
-    const timer = setInterval(() => {
+  // 타이머 시작 함수
+  const startTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current)
+    timerRef.current = setInterval(() => {
       goNext((prev) => (prev + 1) % slides.length)
     }, 3000)
-    return () => clearInterval(timer)
-  }, [goNext]) // ← goNext 의존성 추가
+  }, [goNext])
 
+  // 마운트시 타이머 시작
+  useEffect(() => {
+    startTimer()
+    return () => clearInterval(timerRef.current)
+  }, [startTimer])
+
+  // 도트 클릭시 타이머 리셋
   const handleDotClick = (idx) => {
     if (idx === current) return
     goNext(idx)
+    startTimer()
   }
 
   return (

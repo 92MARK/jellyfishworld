@@ -236,7 +236,6 @@ const HistoryItemMobile = ({ period, items }) => {
     <div className={`${styles.historyItemMobile} ${open ? styles.historyItemMobileOpen : ''}`}>
       <button className={styles.historyMobileHeader} onClick={() => setOpen(prev => !prev)}>
         <span className={styles.historyMobilePeriod}>{period}</span>
-        <span className={styles.historyMobileBadge}>{items.length}건</span>
         <span className={`${styles.historyMobileArrow} ${open ? styles.historyMobileArrowOpen : ''}`}>▾</span>
       </button>
       <div className={`${styles.historyMobileContent} ${open ? styles.historyMobileContentOpen : ''}`}>

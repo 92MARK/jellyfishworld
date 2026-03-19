@@ -23,6 +23,11 @@
   font-size: 64px;
   font-weight: 800;
   text-align: center;
+  text-shadow:
+    -2px -2px 0 #ffffff,
+    2px -2px 0 #ffffff,
+    -2px  2px 0 #ffffff,
+    2px  2px 0 #ffffff;
 }
 
 /* 카테고리 탭 */
