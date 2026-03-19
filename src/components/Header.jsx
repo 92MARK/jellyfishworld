@@ -33,7 +33,7 @@ const Header = () => {
     <header className={styles.header}>
       {/* 로고 - 클릭시 스크롤 초기화 */}
       <Link to="/" className={styles.logo} onClick={scrollToTop}>
-        <img src="/images/logo.png" alt="젤리피쉬월드" className={styles.logoImg} />
+        <img src="/images/logo.webp" alt="젤리피쉬월드" className={styles.logoImg} />
       </Link>
 
       {/* 데스크탑 네비게이션 */}

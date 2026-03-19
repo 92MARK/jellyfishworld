@@ -226,7 +226,7 @@ const Contact = () => {
       />
 
       <section className={styles.hero}>
-        <img src="/images/contact_bg.png" alt="" className={styles.heroBg} />
+        <img src="/images/contact_bg.webp" alt="" className={styles.heroBg} />
         <h1 className={styles.heroTitle}>문의</h1>
       </section>
 

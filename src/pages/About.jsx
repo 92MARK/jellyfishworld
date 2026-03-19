@@ -172,18 +172,18 @@ const history = [
 
 // 고객사 로고 데이터
 const clientLogos = [
-  { img: '/images/clients/visang.png', name: '비상교육' },
-  { img: '/images/clients/chunjae.png', name: '천재교육' },
-  { img: '/images/clients/jihaksa.png', name: '지학사' },
-  { img: '/images/clients/miraen.png', name: '미래엔' },
-  { img: '/images/clients/wink.png', name: 'Wink' },
-  { img: '/images/clients/iscream.png', name: 'i-Scream' },
-  { img: '/images/clients/chunjae2.png', name: '천재교과서' },
-  { img: '/images/clients/pinkfong.png', name: '핑크퐁' },
-  { img: '/images/clients/goodnavers.png', name: '구네이버스' },
-  { img: '/images/clients/redpen.png', name: '빨간펜' },
-  { img: '/images/clients/cong.png', name: '콩' },
-  { img: '/images/clients/hansol.png', name: '한솔교육' },
+  { img: '/images/clients/visang.webp', name: '비상교육' },
+  { img: '/images/clients/chunjae.webp', name: '천재교육' },
+  { img: '/images/clients/jihaksa.webp', name: '지학사' },
+  { img: '/images/clients/miraen.webp', name: '미래엔' },
+  { img: '/images/clients/wink.webp', name: 'Wink' },
+  { img: '/images/clients/iscream.webp', name: 'i-Scream' },
+  { img: '/images/clients/chunjae2.webp', name: '천재교과서' },
+  { img: '/images/clients/pinkfong.webp', name: '핑크퐁' },
+  { img: '/images/clients/goodnavers.webp', name: '구네이버스' },
+  { img: '/images/clients/redpen.webp', name: '빨간펜' },
+  { img: '/images/clients/cong.webp', name: '콩' },
+  { img: '/images/clients/hansol.webp', name: '한솔교육' },
 ]
 
 // 3줄 모두 전체 로고 - 줄마다 시작 순서 다르게
@@ -341,7 +341,7 @@ const About = () => {
 
       {/* 히어로 */}
       <section className={styles.hero}>
-        <img src="/images/about_bg.png" alt="" className={styles.heroBg} />
+        <img src="/images/about_bg.webp" alt="" className={styles.heroBg} />
         <h1 className={styles.heroTitle}>회사 이야기</h1>
       </section>
 

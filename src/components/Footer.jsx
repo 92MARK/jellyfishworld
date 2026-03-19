@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import styles from './Footer.module.css'
 
-const logoImg = "/images/footer_logo.png"
-const bgImg = "/images/footer_bg.png"
-const characterImg = "/images/footer_character.png"
+const logoImg = "/images/footer_logo.webp"
+const bgImg = "/images/footer_bg.webp"
+const characterImg = "/images/footer_character.webp"
 
 const infoItems = [
   { label: '주소', value: '(06302) 서울 강남구 논현로24길 17, 2층' },

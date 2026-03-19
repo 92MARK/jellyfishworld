@@ -213,7 +213,7 @@ const Portfolio = () => {
       />
 
       <section className={styles.hero}>
-        <img src="/images/portfolio_bg.png" alt="" className={styles.heroBg} />
+        <img src="/images/portfolio_bg.webp" alt="" className={styles.heroBg} />
         <h1 className={styles.heroTitle}>포트폴리오</h1>
       </section>
 
