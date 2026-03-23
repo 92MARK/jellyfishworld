@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, forwardRef } from 'react'
+import { useState, useEffect, useRef, forwardRef, useCallback } from 'react'
 import styles from './About.module.css'
 import Seo from '../components/Seo'
 
@@ -196,18 +196,14 @@ const clientRows = [
 // 화면 크기 감지 훅 삭제 - CSS로만 제어
 
 // 데스크탑 연혁 아이템
-const HistoryItem = forwardRef(({ period, items, fixedHeight }, ref) => {
-  const [hovered, setHovered] = useState(false)
-  const handleTouchStart = () => setHovered(true)
-  const handleTouchEnd = () => setTimeout(() => setHovered(false), 1500)
+const HistoryItem = forwardRef(({ period, items, fixedHeight, isActive, onHover, onLeave }, ref) => {
+  const hovered = isActive
 
   return (
     <div
       className={`${styles.historyItem} ${hovered ? styles.historyItemHovered : ''}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
     >
       <div className={styles.historyPeriod}>{period}</div>
       <div className={styles.historyDot} />
@@ -229,16 +225,15 @@ const HistoryItem = forwardRef(({ period, items, fixedHeight }, ref) => {
 })
 HistoryItem.displayName = 'HistoryItem'
 
-// 모바일 아코디언 아이템 (별도 컴포넌트)
-const HistoryItemMobile = ({ period, items }) => {
-  const [open, setOpen] = useState(false)
+// 모바일 아코디언 아이템 - openIdx로 제어
+const HistoryItemMobile = ({ period, items, isOpen, onToggle }) => {
   return (
-    <div className={`${styles.historyItemMobile} ${open ? styles.historyItemMobileOpen : ''}`}>
-      <button className={styles.historyMobileHeader} onClick={() => setOpen(prev => !prev)}>
+    <div className={`${styles.historyItemMobile} ${isOpen ? styles.historyItemMobileOpen : ''}`}>
+      <button className={styles.historyMobileHeader} onClick={onToggle}>
         <span className={styles.historyMobilePeriod}>{period}</span>
-        <span className={`${styles.historyMobileArrow} ${open ? styles.historyMobileArrowOpen : ''}`}>▾</span>
+        <span className={`${styles.historyMobileArrow} ${isOpen ? styles.historyMobileArrowOpen : ''}`}>▾</span>
       </button>
-      <div className={`${styles.historyMobileContent} ${open ? styles.historyMobileContentOpen : ''}`}>
+      <div className={`${styles.historyMobileContent} ${isOpen ? styles.historyMobileContentOpen : ''}`}>
         <ul className={styles.historyMobileList}>
           {items.map((item, idx) => (
             <li key={idx} className={styles.historyMobileItem}>· {item}</li>
@@ -268,62 +263,71 @@ const ClientRow = ({ logos, reverse }) => {
 
 const About = () => {
   const [fixedHeight, setFixedHeight] = useState(0)
+  const [activeIdx, setActiveIdx] = useState(0)
+  const [openMobileIdx, setOpenMobileIdx] = useState(null)  // ← 추가!
   const contentRefs = useRef([])
+  const timerRef = useRef(null)
+
+  // 자동 순환 타이머
+  const startTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current)
+    timerRef.current = setInterval(() => {
+      setActiveIdx(prev => (prev + 1) % history.length)
+    }, 2000)
+  }, [])
+
+  useEffect(() => {
+    startTimer()
+    return () => clearInterval(timerRef.current)
+  }, [startTimer])
+
+  // 마우스오버시 타이머 멈춤
+  const handleHover = (idx) => {
+    setActiveIdx(idx)
+    if (timerRef.current) clearInterval(timerRef.current)
+  }
+
+  // 마우스리브시 타이머 재시작
+  const handleLeave = () => {
+    startTimer()
+  }
 
   // 마운트 후 모든 콘텐츠 높이 측정해서 최대값 고정
   useEffect(() => {
-    // requestAnimationFrame으로 DOM 렌더링 완료 후 측정
     const raf = requestAnimationFrame(() => {
       let max = 0
-
       contentRefs.current.forEach((el) => {
         if (!el) return
-
         const prevOpacity = el.style.opacity
         const prevTransform = el.style.transform
         const prevVisibility = el.style.visibility
-
         el.style.opacity = '1'
         el.style.transform = 'none'
         el.style.visibility = 'hidden'
-
         const h = el.scrollHeight
-
         el.style.opacity = prevOpacity
         el.style.transform = prevTransform
         el.style.visibility = prevVisibility
-
         if (h > max) max = h
       })
-
       if (max > 0) setFixedHeight(max + 32)
     })
-
     return () => cancelAnimationFrame(raf)
   }, [])
 
   // 카카오맵 초기화
   useEffect(() => {
     if (!window.kakao || !window.kakao.maps) return
-
     const container = document.getElementById('kakao-map')
     if (!container) return
-
     const geocoder = new window.kakao.maps.services.Geocoder()
-
     geocoder.addressSearch('서울 강남구 논현로24길 17', (result, status) => {
       if (status === window.kakao.maps.services.Status.OK) {
         const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x)
-
-        const options = {
-          center: coords,
-          level: 3,
-        }
+        const options = { center: coords, level: 3 }
         const map = new window.kakao.maps.Map(container, options)
-
         const marker = new window.kakao.maps.Marker({ position: coords })
         marker.setMap(map)
-
         const infowindow = new window.kakao.maps.InfoWindow({
           content: '<div style="padding:8px 12px;font-size:14px;font-weight:700;">젤리피쉬월드</div>',
         })
@@ -334,10 +338,7 @@ const About = () => {
 
   return (
     <div>
-      <Seo
-        title="회사 이야기"
-        description="2008년 설립된 젤리피쉬월드의 이야기를 소개합니다."
-      />
+      <Seo title="회사 이야기" description="2008년 설립된 젤리피쉬월드의 이야기를 소개합니다." />
 
       {/* 히어로 */}
       <section className={styles.hero}>
@@ -349,8 +350,7 @@ const About = () => {
       <section className={styles.serviceSection}>
         <h2 className={styles.sectionTitle}>우리는 이런 일을 해요.</h2>
         <p className={styles.sectionDesc}>
-          이러닝부터 게임까지 폭넓게 각 분야의 최고 전문가와 함께
-          <br />
+          이러닝부터 게임까지 폭넓게 각 분야의 최고 전문가와 함께<br />
           완성도 높은 콘텐츠를 제작해요.
         </p>
         <div className={styles.serviceList}>
@@ -385,7 +385,7 @@ const About = () => {
           하나씩 쌓아온 시간들이 경험으로 증명된 성장 과정을 보여 드려요.
         </p>
 
-        {/* 데스크탑: 기존 hover 타임라인 */}
+        {/* 데스크탑: 자동순환 + hover 타임라인 */}
         <div className={styles.historyWrap}>
           <div className={styles.historyLine} />
           <div className={styles.historyList}>
@@ -395,6 +395,9 @@ const About = () => {
                 period={h.period}
                 items={h.items}
                 fixedHeight={fixedHeight}
+                isActive={activeIdx === idx}
+                onHover={() => handleHover(idx)}
+                onLeave={handleLeave}
                 ref={(el) => { contentRefs.current[idx] = el }}
               />
             ))}
@@ -403,11 +406,13 @@ const About = () => {
 
         {/* 모바일: 아코디언 타임라인 */}
         <div className={styles.historyMobileWrap}>
-          {history.map((h) => (
+          {history.map((h, idx) => (
             <HistoryItemMobile
               key={`mob-${h.period}`}
               period={h.period}
               items={h.items}
+              isOpen={openMobileIdx === idx}
+              onToggle={() => setOpenMobileIdx(prev => prev === idx ? null : idx)}
             />
           ))}
         </div>
@@ -430,14 +435,13 @@ const About = () => {
       <section className={styles.mapSection}>
         <h2 className={styles.sectionTitle}>찾아오시는 길</h2>
         <p className={styles.sectionDesc}>
-          (06302) 서울 강남구 논현로24길 17, 2층 (주)젤리피쉬월드
-          <br />
+          (06302) 서울 강남구 논현로24길 17, 2층 (주)젤리피쉬월드<br />
           (지하철 3호선 4번 출구 700m)
         </p>
         <div id="kakao-map" className={styles.map} />
       </section>
     </div>
-  );
+  )
 }
 
 export default About

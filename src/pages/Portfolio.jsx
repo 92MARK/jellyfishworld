@@ -179,7 +179,14 @@ const Portfolio = () => {
     : portfolioData.filter(item => item.category === activeCategory)
 
   const groupedData = categories.slice(1).reduce((acc, cat) => {
-    const items = portfolioData.filter(item => item.category === cat)
+    const items = portfolioData
+      .filter(item => item.category === cat)
+      .sort((a, b) => {
+        // year에서 숫자만 추출해서 내림차순 정렬
+        const yearA = parseInt(a.year) || 0
+        const yearB = parseInt(b.year) || 0
+        return yearB - yearA
+      })
     if (items.length > 0) acc[cat] = items
     return acc
   }, {})

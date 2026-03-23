@@ -141,8 +141,7 @@
 
 /* 연혁 섹션 */
 .historySection {
-  background-color: #f8f9fa;
-  padding: 100px 80px;
+  padding: 100px 80px 0;
 }
 
 .historyWrap {
@@ -319,7 +318,6 @@
 
 /* 지도 섹션 */
 .mapSection {
-  background-color: #f8f9fa;
   padding: 100px 80px;
 }
 
