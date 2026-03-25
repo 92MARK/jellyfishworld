@@ -59,7 +59,7 @@
   cursor: pointer;
   color: #222;
   border-bottom: 2px solid transparent;
-  transition: all 0.2s;
+  /* transition: all 0.1s; */
   width: 200px;
   text-align: center;
 }
@@ -70,11 +70,15 @@
 
 .tabBtn:hover {
   color: #1daeef;
+  font-size: 20px;
+  font-weight: 900;
 }
 
 .tabBtnActive {
   color: #1daeef;
-  border-bottom: 2px solid #1daeef;
+  font-size: 20px;
+  font-weight: 900;
+  /* border-bottom: 2px solid #1daeef; */
 }
 
 .tabLine {

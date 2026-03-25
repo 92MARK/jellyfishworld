@@ -41,17 +41,18 @@
   text-align: center;
   text-decoration: none;
   color: black;
-  transition: color 0.2s;
 }
 
 .navLink:hover {
   color: #1daeef;
+  font-weight: 900;
+  font-size: 28px;
 }
 
 .navLinkActive {
   color: #1daeef;
-  border-bottom: 2px solid #1daeef;
-  padding-bottom: 4px;
+  font-weight: 900;
+  font-size: 28px;
 }
 
 .spacer {
