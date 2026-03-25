@@ -197,7 +197,8 @@ const Contact = () => {
         },
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
       );
-      setSuccess(true);
+      setSuccess(true)
+      window.scrollTo({ top: 0, behavior: 'instant' })
       setForm({
         from_name: "",
         from_agency: "",
