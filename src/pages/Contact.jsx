@@ -374,7 +374,9 @@ const Contact = () => {
 
               {/* 개인정보처리방침 */}
               <div className={styles.policyWrap}>
-                <p className={styles.policyTitle}>개인정보처리 방침</p>
+                <p className={styles.policyTitle}>
+                  <span className={styles.required}>(필수)</span> 개인정보처리 방침
+                </p>
                 <div className={styles.policyBox}>
                   <div className={styles.scrollBox}>
                     <pre className={styles.policyText}>{privacyPolicy}</pre>
