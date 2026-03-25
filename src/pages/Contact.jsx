@@ -234,16 +234,13 @@ const Contact = () => {
         <div className={styles.formWrap}>
           {success ? (
             <div className={styles.successBox}>
-              <p className={styles.successIcon}>✅</p>
-              <p className={styles.successTitle}>문의가 접수되었습니다!</p>
-              <p className={styles.successDesc}>
-                빠른 시일 내에 연락드리겠습니다 😄
-              </p>
+              <p className={styles.successTitle}><img src="/images/contact_bubble1.webp" alt="" />문의 접수가 완료되었어요!<img src="/images/contact_bubble2.webp" alt="" /></p>
+              <p className={styles.successDesc}>문의하신 내용은 빠른 시일 내에 답변드리도록 할게요.</p>
               <button
                 className={styles.successBtn}
                 onClick={() => setSuccess(false)}
               >
-                새 문의 작성
+                새 문의 작성하기
               </button>
             </div>
           ) : (
